@@ -1,0 +1,123 @@
+//JG
+import java.io.*;
+import java.util.*;
+
+public class DFSearch {
+
+	//Declare relevant data members
+	public int limit;
+	public String start;
+	public String end;
+	public Map map;
+	public int nodeExpansionCount;
+	
+	public DFSearch (Map map, String start, String end, int limit) 
+	{
+		this.start = start; 			//initialize start point
+		this.end = end;					//initialize end point
+		this.map = map;					//initiallize map
+		this.limit = limit;				//intialize depth limit
+
+	}
+	
+	
+	public Node search(boolean repeatedState) {
+		nodeExpansionCount = 0;
+	
+		//create new frontier using data structure stack -- LIFO PRINCIPLE
+		
+		
+		//************************************************
+		//************************************************
+		//
+		//		Checking repeated states 
+		//
+		//************************************************
+		//************************************************
+		if(repeatedState)  //EVALUATES TO TRUE
+		{ 
+			Node initialNode = new Node(map.findLocation(start));
+			Frontier stack = new Frontier();
+			
+			stack.addToTop(initialNode); //STACK intially contains first node (start)
+			
+			HashSet<String> exploredSet = new HashSet<String>();
+		
+		while(true) 
+			{
+				if(stack.isEmpty()) 
+				{
+					return null; //FAILURE
+				} 
+				
+				else 
+				{
+					initialNode = stack.removeTop();
+						if(initialNode.isDestination(end))
+						{
+							return initialNode;
+						}
+						
+					exploredSet.add(initialNode.loc.name);
+					initialNode.expand();
+					nodeExpansionCount = nodeExpansionCount+1;
+				}
+				
+			for(Node i: initialNode.children) 
+			{
+				if(!exploredSet.contains(i.loc.name) && !stack.contains(i.loc.name))
+				{
+					stack.addToTop(i);
+				}
+			}
+			if (stack.isEmpty())
+			{
+				return null;
+			}
+		}
+			
+		}
+		
+		
+		//************************************************
+		//************************************************
+		//
+		//		Not checking repeated states 
+		//
+		//************************************************
+		//************************************************
+		
+		 else
+		 { 
+	
+			Node initialNode = new Node(map.findLocation(start));
+			Frontier stack = new Frontier();
+			stack.addToTop(initialNode);
+			
+			while(true) 
+			{
+				if(stack.isEmpty() || initialNode.depth == limit - 1) 
+				{
+					return null;
+				}
+				else
+				{
+					initialNode = stack.removeTop();
+					
+				if(initialNode.isDestination(end)) 
+					{
+						return initialNode;
+					} 
+					initialNode.expand();
+					nodeExpansionCount = nodeExpansionCount +1;
+					stack.addToTop(initialNode.children);
+				}	
+			}	
+		}	
+	}	
+}
+
+
+
+
+		

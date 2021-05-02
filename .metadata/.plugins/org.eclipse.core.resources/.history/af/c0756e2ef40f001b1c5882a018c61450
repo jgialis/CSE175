@@ -1,0 +1,19 @@
+import java.io.*;
+
+
+import java.math.*;
+
+public class MainClass {
+	
+	public static void main(String[] args) {
+	
+		int l  = Math.pow(9, 2)
+		
+		System.out.println(l);
+		
+		
+	}
+	
+		
+		
+}

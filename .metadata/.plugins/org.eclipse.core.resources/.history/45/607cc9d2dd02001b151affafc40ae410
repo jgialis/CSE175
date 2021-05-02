@@ -1,0 +1,202 @@
+//JG
+import java.io.*;
+import java.util.*;
+
+public class BFSearch {
+
+	//Declare relevant data members
+	public int limit;
+	public String start;
+	public String end;
+	public Map map;
+	public int expansionCount;
+	public SearchDisplay display;
+	
+	//Parameterized constructor for BFSearch
+	public BFSearch (Map map, String start, String end, int limit, SearchDisplay display)
+		this.start = start;
+		this.end = end;
+		this.map = map;
+		this.limit = limit;
+		this.display = display;
+	}
+	
+
+	public Node search(boolean repeat)
+	{
+		expansionCount = 0;      
+		
+		//Creates the start of the frontier by adding first element
+		Node initialNode = new Node(map.findLocation(start));
+		
+		Frontier queue = new Frontier();
+		
+		queue.addToBottom(initialNode);
+		
+		//************************************************
+		//************************************************
+		//
+		//		Checking repeated states 
+		//
+		//************************************************
+		//************************************************
+		if (repeat == true)
+		{
+		HashSet<String> exploredSet = new HashSet<String>();
+			while(true) 
+			{
+				if(queue.isEmpty()) 
+				{
+					return null;	
+				} 
+				else 
+				{
+					initialNode = queue.removeTop();
+					
+					if(initialNode.isDestination(end)) 
+					{ //if the destination is found then return the node.
+						return initialNode;
+					}
+					
+					exploredSet.add(initialNode.loc.name); //add visited nodes to list.
+					initialNode.expand();   //expands node to add child nodes
+					nodeExpansionCount++;  
+				}
+				
+				//This for loop will iterate through all children
+				for(Node i: initialNode.children)
+				{ 
+					
+					//Checks the boolean function in the HashSet contains to see if the loc.name is an element
+					//of the hashset or of the queue
+					if(!exploredSet.contains(i.loc.name) && !queue.contains(i.loc.name))
+					{ 
+						//Add to the queue if the explored set does not have i and the queue does not have i, .
+						queue.addToBottom(i);
+					}
+					
+				}
+				
+				if(queue.isEmpty()) 
+				{
+					return null;
+				}
+				
+			} 
+		
+		
+		}
+		
+		//************************************************
+		//************************************************
+		//
+		//		Not checking repeated states 
+		//
+		//************************************************
+		//************************************************
+		
+		else
+		{ 
+			while(!queue.isEmpty() && initialNode.depth <= limit)
+			{ 
+				initialNode = queue.removeTop();
+				
+				if(initialNode.isDestination(end))
+				{
+					return initialNode;
+				}
+				initialNode.expand();
+				nodeExpansionCount = nodeExpansionCount +1;
+				queue.addToBottom(initialNode.children);
+				
+			}
+			
+			return null;		
+		}	
+	}
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//import java.util.*;
+//import java.io.*;
+//
+//public class BFSearch
+//{
+//	public Node nodeObject = new Node();
+//	public Map map = new Map();
+//	public String startLocation;
+//	public String endLocation;
+//	public int depth;
+//	public int nodeExpansionCount;
+//	
+//	//Default Constructor
+//	public BFSearch()
+//	{
+//		startLocation = "Start Point";
+//		endLocation = "End Point";
+//		depth = 1000;
+//	}
+//	
+//	public BFSearch(Map map, String startLocation, String endLocation, int depth)
+//	{
+//		this.startLocation = startLocation;
+//		this.endLocation = endLocation;
+//		map = new Map();
+//		this.depth = depth;
+//	}
+//	
+//	
+//	public Node search(boolean bool)
+//	{
+//		return null;
+//	}
+//
+//}

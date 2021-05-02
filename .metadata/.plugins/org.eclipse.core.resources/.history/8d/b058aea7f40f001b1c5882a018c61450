@@ -1,0 +1,18 @@
+import java.io.*;
+
+
+
+public class MainClass {
+	
+	public static void main(String[] args) {
+	
+		double  l  = Math.pow(10, 2);
+		
+		System.out.println(l);
+		
+		
+	}
+	
+		
+		
+}

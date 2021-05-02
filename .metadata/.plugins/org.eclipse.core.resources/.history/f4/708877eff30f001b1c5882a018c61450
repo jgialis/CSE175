@@ -1,0 +1,18 @@
+import java.io.*;
+
+import java.util.*;
+
+public class MainClass {
+	
+	public static void main(String[] args) {
+	
+		Node n1 = new Node();
+		
+		List<Node> fringe;
+		
+		
+	}
+	
+		
+		
+}

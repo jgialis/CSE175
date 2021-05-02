@@ -1,0 +1,7 @@
+INDEX VERSION 1.131+/Users/JoshGialis/Desktop/Fall 2020/CSE 175/.metadata/.plugins/org.eclipse.jdt.core
+2484887808.index
+3128207647.index
+561878467.index
+2048000044.index
+3810667483.index
+219492538.index

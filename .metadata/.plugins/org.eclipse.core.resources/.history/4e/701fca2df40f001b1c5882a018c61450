@@ -1,0 +1,19 @@
+import java.io.*;
+
+
+import java.math.*;
+
+public class MainClass {
+	
+	public static void main(String[] args) {
+	
+		int l  = sqrt(64);
+		
+		System.out.println(l);
+		
+		
+	}
+	
+		
+		
+}
